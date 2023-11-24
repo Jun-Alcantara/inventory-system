@@ -10,12 +10,14 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="{{ route('equipments.index') }}">Equipments</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ route('users.index') }}">Users</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ route('logs.index') }}">Logs</a>
-        </li>
+        @if (auth()->user()->usertype == "administrator")
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('users.index') }}">Users</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('logs.index') }}">Logs</a>
+          </li>
+        @endif
         {{-- <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Dropdown

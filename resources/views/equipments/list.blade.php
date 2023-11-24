@@ -4,14 +4,16 @@
   <div class="container">
     <div class="content mt-4">
       <div class="d-flex justify-content-between mb-4">
-        <div><h1>Equipments List</h1></div>
-        <div class="d-flex align-items-center">
-          <a href="{{ route('equipments.create') }}" class="btn btn-primary">
-            <i class="fa fa-plus"></i> Add New Equipment
-          </a>
-        </div>
+        <div><h3>Equipments List</h3></div>
+        @if (in_array(auth()->user()->usertype, ['administrator', 'technical']))
+          <div class="d-flex align-items-center">
+            <a href="{{ route('equipments.create') }}" class="btn btn-primary">
+              <i class="fa fa-plus"></i> Add New Equipment
+            </a>
+          </div>
+        @endif
       </div>
-      <table id="equipments-table" class="table table-bordered table-striped mt-5">
+      <table id="equipments-table" class="table table-striped mt-5">
         <thead>
           <tr>
             <th>Asset Number</th>
@@ -19,8 +21,10 @@
             <th>Type</th>
             <th>Department</th>
             <th>Status</th>
-            <th></th>
-            <th></th>
+            @if (in_array(auth()->user()->usertype, ['administrator', 'technical']))
+              <th></th>
+              <th></th>
+            @endif
           </tr>
         </thead>
         <tbody>
@@ -31,16 +35,18 @@
               <td>{{ $e->type->name }}</td>
               <td>{{ $e->department->name }}</td>
               <td>{{ $e->status->name }}</td>
-              <td class="text-center">
-                <a href="{{ route('equipments.edit', $e) }}" class="text-primary"><i class="fa fa-edit"></i></a>
-                <form action="{{ route('equipments.destroy', $e) }}" method="POST" id="delete-form-{{ $e->id }}">
-                  @csrf
-                  <input type="hidden" name="_method" value="delete">
-                </form>
-              </td>
-              <td class="text-center">
-                <a href="#" class="delete-btn text-danger" data-form="#delete-form-{{ $e->id }}"><i class="fa fa-trash"></i></a>
-              </td>
+              @if (in_array(auth()->user()->usertype, ['administrator', 'technical']))
+                <td class="text-center">
+                  <a href="{{ route('equipments.edit', $e) }}" class="text-primary"><i class="fa fa-edit"></i></a>
+                  <form action="{{ route('equipments.destroy', $e) }}" method="POST" id="delete-form-{{ $e->id }}">
+                    @csrf
+                    <input type="hidden" name="_method" value="delete">
+                  </form>
+                </td>
+                <td class="text-center">
+                  <a href="#" class="delete-btn text-danger" data-form="#delete-form-{{ $e->id }}"><i class="fa fa-trash"></i></a>
+                </td>
+              @endif
             </tr>
           @empty
             <tr>

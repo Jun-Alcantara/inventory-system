@@ -38,8 +38,9 @@
             <div class="mb-3">
               <select class="form-select" name="user_type" required>
                 <option selected>-- Select User Type --</option>
-                <option value="user">User</option>
                 <option value="administrator">Administrator</option>
+                <option value="technical">Technical</option>
+                <option value="user">User</option>
               </select>
             </div>
 

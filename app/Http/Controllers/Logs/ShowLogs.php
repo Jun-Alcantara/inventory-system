@@ -9,7 +9,7 @@ class ShowLogs extends Controller
 {
     public function __invoke()
     {
-        $logs = Log::all();
+        $logs = Log::orderBy('created_at', 'DESC')->get();
         return view('logs.index', compact('logs'));
     }
 }
