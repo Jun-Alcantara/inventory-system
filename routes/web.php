@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => ['auth', 'web']], function () {
     Route::get('/', function () {
-        redirect('/equipments');
+        return redirect('/equipments');
     });
 
     Route::group(['prefix' => 'users', 'middleware' => 'roleRestricted:administrator'], function () {
@@ -42,7 +42,7 @@ Route::group(['middleware' => ['auth', 'web']], function () {
     Route::get('logout', function () {
         Auth::logout();
 
-        redirect('/login');
+        return redirect('/login');
     })->name('logout');
 });
 
