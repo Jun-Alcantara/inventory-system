@@ -6,11 +6,11 @@ use Illuminate\Support\Facades\Route;
 
 /*** !! NOTE: Namespace App\Http\Controllers is added in RouteServiceProvider */
 
-Route::get('/create-password', function () {
-    Auth::logout();
-});
-
 Route::group(['middleware' => ['auth', 'web']], function () {
+    Route::get('/', function () {
+        redirect('/equipments');
+    });
+
     Route::group(['prefix' => 'users', 'middleware' => 'roleRestricted:administrator'], function () {
         Route::get('/', \User\ShowUsers::class)->name('users.index');
         Route::get('create', \User\ShowCreateUserForm::class)->name('users.create');
@@ -38,6 +38,12 @@ Route::group(['middleware' => ['auth', 'web']], function () {
             ->middleware('roleRestricted:administrator')
             ->name('logs.clear');
     });
+
+    Route::get('logout', function () {
+        Auth::logout();
+
+        redirect('/login');
+    })->name('logout');
 });
 
 Route::group(['middleware' => 'guest'], function () {

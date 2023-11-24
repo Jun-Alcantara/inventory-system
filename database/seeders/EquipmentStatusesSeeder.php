@@ -14,7 +14,9 @@ class EquipmentStatusesSeeder extends Seeder
     public function run(): void
     {
         $statuses = [
-            'Working'
+            'Working', 
+            'On-Repait',
+            'Retired'
         ];
 
         EquipmentStatus::truncate();

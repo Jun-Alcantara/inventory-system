@@ -41,8 +41,9 @@
             <div class="mb-3">
               <select class="form-select" name="user_type" required>
                 <option selected>-- Select User Type --</option>
-                <option value="user" {{ $user->usertype === 'user' ? 'selected' : '' }}>User</option>
                 <option value="administrator" {{ $user->usertype === 'administrator' ? 'selected' : '' }}>Administrator</option>
+                <option value="technical" {{ $user->usertype === 'technical' ? 'selected' : '' }}>Technical</option>
+                <option value="user" {{ $user->usertype === 'user' ? 'selected' : '' }}>User</option>
               </select>
             </div>
 
