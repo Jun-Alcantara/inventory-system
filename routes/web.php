@@ -1,12 +1,13 @@
 <?php
 
 use App\Http\Middleware\EnsureUserHasRole;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*** !! NOTE: Namespace App\Http\Controllers is added in RouteServiceProvider */
 
 Route::get('/create-password', function () {
-    return bcrypt('password');
+    Auth::logout();
 });
 
 Route::group(['middleware' => ['auth', 'web']], function () {

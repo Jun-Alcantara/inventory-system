@@ -21,6 +21,6 @@ class AuthenticateUser extends Controller
                 ->withInput();
         }
 
-        return redirect()->route('equipment.index');
+        return redirect()->route('equipments.index');
     }
 }
