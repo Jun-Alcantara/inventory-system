@@ -5,6 +5,10 @@ use Illuminate\Support\Facades\Route;
 
 /*** !! NOTE: Namespace App\Http\Controllers is added in RouteServiceProvider */
 
+Route::get('/create-password', function () {
+    return bcrypt('password');
+});
+
 Route::group(['middleware' => ['auth', 'web']], function () {
     Route::group(['prefix' => 'users', 'middleware' => 'roleRestricted:administrator'], function () {
         Route::get('/', \User\ShowUsers::class)->name('users.index');
