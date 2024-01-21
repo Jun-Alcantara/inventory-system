@@ -39,6 +39,15 @@ Route::group(['middleware' => ['auth', 'web']], function () {
             ->name('logs.clear');
     });
 
+    Route::group(['prefix' => 'tickets'], function () {
+        Route::get('/', \Tickets\ShowTickets::class)->name('tickets.index');
+        Route::get('create', \Tickets\ShowCreateTicketForm::class)->name('tickets.create');
+        Route::post('create', \Tickets\CreateTicket::class)->name('tickets.store');
+        Route::post('delete', \Tickets\DeleteTicket::class)->name('tickets.delete');
+        Route::get('{ticket}/edit', \Tickets\ShowEditForm::class)->name('tickets.edit');
+        Route::post('{ticket}/edit', \Tickets\UpdateTicket::class)->name('tickets.update');
+    });
+
     Route::get('logout', function () {
         Auth::logout();
 
